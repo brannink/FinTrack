@@ -9,6 +9,10 @@ public class FinTracker {
     ArrayList<Transacao> bucket = new ArrayList<>();
     private int proximoId = 1;
 
+    public int getProximoId(){
+        return this.proximoId;
+    }
+
     public boolean adicionarTransacao(String descricao, double valor, boolean ehReceita, LocalDate data){
         try {
             bucket.add(new Transacao(proximoId, descricao, valor, ehReceita, data));
@@ -18,6 +22,16 @@ public class FinTracker {
             return false;
         }
     }
+
+    public boolean adicionarTransacao(Transacao t) {
+    try {
+        bucket.add(t);
+        proximoId++;
+        return true;
+    } catch (Exception e) {
+        return false;
+    }
+}
 
     public void listarTransacao(){
         if(bucket.isEmpty()){
