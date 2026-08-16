@@ -2,6 +2,8 @@ package fintrack.model;
 
 import java.time.LocalDate;
 
+import fintrack.exception.ValorInvalidoException;
+
 /**
  * Representa uma transação financeira que se repete mensalmente
  * (ex: salário, aluguel, assinatura), guardando o dia do mês em
@@ -18,7 +20,7 @@ public class TransacaoMensal extends Transacao{
      * @param data data de criação/referência da transação
      * @param dia dia do mês em que a transação se repete
      */
-    public TransacaoMensal(int id, String descricao, double valor, boolean ehReceita, LocalDate data, int dia){
+    public TransacaoMensal(int id, String descricao, double valor, boolean ehReceita, LocalDate data, int dia) throws ValorInvalidoException {
         super(id, descricao, valor, ehReceita, data);
         this.dia = dia;
     }

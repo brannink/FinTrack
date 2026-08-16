@@ -3,6 +3,7 @@ package fintrack.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import fintrack.exception.ValorInvalidoException;
 import fintrack.model.Transacao;
 
 /**
@@ -35,12 +36,13 @@ public class FinTracker {
      * @param data data em que a transação ocorreu
      * @return true se a transação foi adicionada com sucesso, false caso contrário
      */
-    public boolean adicionarTransacao(String descricao, double valor, boolean ehReceita, LocalDate data){
+    public boolean adicionarTransacao(String descricao, double valor, boolean ehReceita, LocalDate data) {
         try {
             bucket.add(new Transacao(proximoId, descricao, valor, ehReceita, data));
             proximoId++;
             return true;
-        } catch (Exception e) {
+        } catch (ValorInvalidoException e) {
+            System.out.println("Erro: " + e.getMessage());
             return false;
         }
     }

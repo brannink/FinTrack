@@ -2,6 +2,8 @@ package fintrack.model;
 
 import java.time.LocalDate;
 
+import fintrack.exception.ValorInvalidoException;
+
 /**
  * Representa uma transação financeira simples (receita ou despesa),
  * contendo id, descrição, valor, tipo e data.
@@ -21,7 +23,13 @@ public class Transacao {
      * @param ehReceita true se for receita, false se for despesa
      * @param data data em que a transação ocorreu
      */
-    public Transacao(int id, String descricao, double valor, boolean ehReceita, LocalDate data){
+    public Transacao(int id, String descricao, double valor, boolean ehReceita, LocalDate data) throws ValorInvalidoException {
+        if (valor < 0) {
+            throw new ValorInvalidoException("O valor da transação não pode ser negativo.");
+        }
+        if (descricao == null || descricao.isBlank()) {
+            throw new ValorInvalidoException("A descrição não pode estar vazia.");
+        } 
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
@@ -94,7 +102,7 @@ public class Transacao {
     /**
      * Retorna a representação textual da transação, incluindo
      * id, tipo (receita/despesa), valor, data e descrição.
-     */
+     */    
     @Override
     public String toString(){
         String tipo = ehReceita ? "Receita" : "Despesa";

@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fintrack.controller.FinTracker;
+import fintrack.exception.ValorInvalidoException;
 import fintrack.model.*;
 import static fintrack.utils.Formatador.*;
 
@@ -43,16 +44,20 @@ public class Main{
                     LocalDate data = LocalDate.now();
                     int novoId = tracker.getProximoId();
 
-                    Transacao nova;
-                    if(ehMensal){
-                        System.out.println("Qual o dia do mes?");
-                        int dia = lerInt(option);
-                        nova = new TransacaoMensal(novoId, descricao, valor, ehReceita, data, dia);
-                    }else{
-                        nova = new Transacao(novoId, descricao, valor, ehReceita, data);
+                    try {
+                        Transacao nova;
+                        if(ehMensal){
+                            System.out.println("Qual o dia do mes?");
+                            int dia = lerInt(option);
+                            nova = new TransacaoMensal(novoId, descricao, valor, ehReceita, data, dia);
+                        }else{
+                            nova = new Transacao(novoId, descricao, valor, ehReceita, data);
+                        }
+                        tracker.adicionarTransacao(nova);
+                        System.out.println("Transacao adicionada!");
+                    } catch (ValorInvalidoException e) {
+                        System.out.println("Erro ao criar transação: " + e.getMessage());
                     }
-                    tracker.adicionarTransacao(nova);
-                    System.out.println("Transacao adicionada!");
                     sleep(2000);
                     limparTela();
                     break;
