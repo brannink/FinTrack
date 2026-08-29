@@ -1,7 +1,9 @@
-/home/brandao/curse/FinTrack/fintrack/src/main/java/fintrack/utils/Formatador.java
-/home/brandao/curse/FinTrack/fintrack/src/main/java/fintrack/controller/FinTracker.java
-/home/brandao/curse/FinTrack/fintrack/src/main/java/fintrack/model/TransacaoMensal.java
-/home/brandao/curse/FinTrack/fintrack/src/main/java/fintrack/App.java
-/home/brandao/curse/FinTrack/fintrack/src/main/java/fintrack/exception/ValorInvalidoException.java
-/home/brandao/curse/FinTrack/fintrack/src/main/java/fintrack/app/Main.java
-/home/brandao/curse/FinTrack/fintrack/src/main/java/fintrack/model/Transacao.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/model/Transacao.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/dao/TransacaoDao.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/app/FinApp.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/exception/ValorInvalidoException.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/controller/NovaTransacaoController.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/model/TransacaoMensal.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/controller/FinTracker.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/db/Conexao.java
+/home/brandao/curse/fintrack/src/main/java/fintrack/controller/PrincipalController.java

@@ -2,7 +2,9 @@ package fintrack.model;
 
 import java.time.LocalDate;
 
+
 import fintrack.exception.ValorInvalidoException;
+
 
 /**
  * Representa uma transação financeira simples (receita ou despesa),
@@ -12,7 +14,7 @@ public class Transacao {
     private int id;
     private String descricao;
     private double valor;
-    private boolean ehReceita;
+    private String tipo;
     private LocalDate data;
 
     /**
@@ -20,10 +22,10 @@ public class Transacao {
      * @param id identificador único da transação
      * @param descricao descrição da transação
      * @param valor valor da transação
-     * @param ehReceita true se for receita, false se for despesa
+     * @param tipo descreve qual tipo a transação se classifica
      * @param data data em que a transação ocorreu
      */
-    public Transacao(int id, String descricao, double valor, boolean ehReceita, LocalDate data) throws ValorInvalidoException {
+    public Transacao(int id, String descricao, double valor, String tipo, LocalDate data) throws ValorInvalidoException {
         if (valor < 0) {
             throw new ValorInvalidoException("O valor da transação não pode ser negativo.");
         }
@@ -33,7 +35,7 @@ public class Transacao {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
-        this.ehReceita = ehReceita;
+        this.tipo = tipo;
         this.data = data;
     }
     /**
@@ -51,13 +53,6 @@ public class Transacao {
         return this.descricao;
     }
     /**
-     * Define a descrição da transação.
-     * @param descricao nova descrição da transação
-     */
-    public void setDescricao(String descricao){
-        this.descricao = descricao;
-    }
-    /**
      * Retorna o valor da transação.
      * @return o valor da transação
      */
@@ -65,25 +60,11 @@ public class Transacao {
         return this.valor;
     }
     /**
-     * Define o valor da transação.
-     * @param valor novo valor da transação
-     */
-    public void setValor(double valor){
-        this.valor = valor;
-    }
-    /**
      * Indica se a transação é uma receita ou despesa.
-     * @return true se for receita, false se for despesa
+     * @return o tipo de transação
      */
-    public boolean getEhReceita(){
-        return this.ehReceita;
-    }
-    /**
-     * Define se a transação é receita ou despesa.
-     * @param ehReceita true para receita, false para despesa
-     */
-    public void setEhReceita(boolean ehReceita){
-        this.ehReceita = ehReceita;
+    public String getTipo(){
+        return this.tipo;
     }
     /**
      * Retorna a data em que a transação ocorreu.
@@ -91,21 +72,5 @@ public class Transacao {
      */
     public LocalDate getData(){
         return this.data;
-    }
-    /**
-     * Define a data da transação.
-     * @param data nova data da transação
-     */
-    public void setData(LocalDate data){
-        this.data = data;
-    }
-    /**
-     * Retorna a representação textual da transação, incluindo
-     * id, tipo (receita/despesa), valor, data e descrição.
-     */    
-    @Override
-    public String toString(){
-        String tipo = ehReceita ? "Receita" : "Despesa";
-        return String.format("[%d]\n | %s -- R$ %.2f |\n %s\n %s\n", id, tipo, valor, data, descricao);
     }
 }

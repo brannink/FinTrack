@@ -1,7 +1,4 @@
 fintrack/model/Transacao.class
-fintrack/utils/Formatador.class
 fintrack/model/TransacaoMensal.class
-fintrack/app/Main.class
 fintrack/exception/ValorInvalidoException.class
-fintrack/App.class
 fintrack/controller/FinTracker.class

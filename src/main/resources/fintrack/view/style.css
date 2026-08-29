@@ -1,0 +1,155 @@
+/*style.css produzido com auxilio do Google Gemini PRO*/
+.root {
+    -fx-base: #1e1e1e;
+    -fx-background-color: #121212;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* Evita que Panes vazios ganhem cor de fundo sólida */
+.pane {
+    -fx-background-color: transparent;
+}
+
+/* LABELS */
+.label {
+    -fx-text-fill: #ffffff;
+}
+
+.label-saldo-neutro {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.label-saldo-positivo {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: lightgreen;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.label-saldo-negativo {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: red;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* ENTRADAS */
+.text-field, .date-picker {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #555555;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 6px;
+}
+
+.text-field:focused, .date-picker:focused {
+    -fx-border-color: #357abd;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #444444;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #ffffff;
+}
+
+/* RADIO BUTTONS */
+.radio-button {
+    -fx-text-fill: #ffffff;
+}
+
+.radio-button .radio {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #666666;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #357abd;
+}
+
+/* BOTÕES */
+.button {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-color: #555555;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #4a4a4a;
+}
+
+#btnSalvar, #btnAdicionarTransacao {
+    -fx-background-color: #1e7e34;
+    -fx-border-color: #28a745;
+}
+
+#btnSalvar:hover, #btnAdicionarTransacao:hover {
+    -fx-background-color: #218838;
+}
+
+#btnRemoverTransacao, #btnCancelar {
+    -fx-background-color: #bd2130;
+    -fx-border-color: #dc3545;
+}
+
+#btnRemoverTransacao:hover, #btnCancelar:hover {
+    -fx-background-color: #c82333;
+}
+
+/* TABELA */
+.table-view {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #333333;
+}
+
+.table-view .column-header-background,
+.table-view .filler,
+.table-view .corner {
+    -fx-background-color: #2a2a2a;
+}
+
+.table-view .column-header {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #333333;
+    -fx-border-width: 0 1px 1px 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #252525;
+}
+
+.table-row-cell .text {
+    -fx-fill: #ffffff;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #333333;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #357abd;
+}

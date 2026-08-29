@@ -1,9 +1,10 @@
 package fintrack.controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
-import fintrack.exception.ValorInvalidoException;
+
+import fintrack.dao.TransacaoDao;
 import fintrack.model.Transacao;
 
 /**
@@ -11,94 +12,46 @@ import fintrack.model.Transacao;
  * permitindo adicionar, remover, listar e calcular saldo.
  */
 public class FinTracker {
-    ArrayList<Transacao> bucket = new ArrayList<>();
-    private int proximoId = 1;
-    /**
-    * Verifica se não há nenhuma transação cadastrada.
-    * @return true se não houver transações, false caso contrário
-    */
-    public boolean isVazio(){
-        return bucket.isEmpty();
-    }
-    /**
-     * Retorna o próximo id disponível para uma nova transação.
-     * @return o próximo id a ser utilizado
-     */
-    public int getProximoId(){
-        return this.proximoId;
-    }
-    /**
-     * Cria e adiciona uma nova transação ao tracker, usando o próximo
-     * id disponível automaticamente.
-     * @param descricao descrição da transação
-     * @param valor valor da transação
-     * @param ehReceita true se for receita, false se for despesa
-     * @param data data em que a transação ocorreu
-     * @return true se a transação foi adicionada com sucesso, false caso contrário
-     */
-    public boolean adicionarTransacao(String descricao, double valor, boolean ehReceita, LocalDate data) {
-        try {
-            bucket.add(new Transacao(proximoId, descricao, valor, ehReceita, data));
-            proximoId++;
-            return true;
-        } catch (ValorInvalidoException e) {
-            System.out.println("Erro: " + e.getMessage());
-            return false;
-        }
+    private TransacaoDao dao;
+
+    public FinTracker() throws SQLException {
+        this.dao = new TransacaoDao();
     }
     /**
      * Adiciona uma transação já construída (ex: TransacaoMensal) ao tracker.
      * @param t transação a ser adicionada
-     * @return true se a transação foi adicionada com sucesso, false caso contrário
+     * @return true se a transação foi adicionada com sucesso
+     * @throws SQLException caso contrário ocorra erro ao salvar 
      */
-    public boolean adicionarTransacao(Transacao t) {
-        try {
-            bucket.add(t);
-            proximoId++;
+    public boolean adicionarTransacao(Transacao t) throws SQLException {
+            dao.salvar(t);
             return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
     /**
      * Exibe no console todas as transações cadastradas.
      * Caso não haja nenhuma, informa que a lista está vazia.
+     * @return uma lista de objetos do tipo Transacao
+     * @throws SQLException caso ocorra algum erro no método
      */
-    public void listarTransacao(){
-        if(bucket.isEmpty()){
-            System.out.println("Nenhuma transação cadastrada.");
-        }
-        for(Transacao t : bucket){
-            System.out.println(t);
-        }    
+    public List<Transacao> listarTransacao() throws SQLException{
+        return dao.buscarTodos();
     }
     /**
      * Remove a transação com o id informado, se existir.
      * @param id id da transação a ser removida
-     * @return true se a transação foi encontrada e removida, false caso contrário
+     * @return true se a transação foi encontrada e removida
+     * @throws SQLException caso ocorra erro ao remover
      */
-    public boolean removerTransacao(int id){
-        for(Transacao t : bucket){
-            if(t.getId() == id){
-                bucket.remove(t);
-                return true;
-            }
-        }
-        return false;
+    public boolean removerTransacao(int id) throws SQLException{
+        dao.remover(id);
+        return true;
     }
     /**
      * Calcula o saldo total somando receitas e subtraindo despesas.
      * @return o saldo atual, podendo ser negativo
+     * @throws SQLException caso ocorra algum erro
      */
-    public double calcularSaldoTotal(){
-        double saldo = 0;
-        for(Transacao t : bucket){
-            if(t.getEhReceita()){
-                saldo += t.getValor();
-            }else{
-                saldo -= t.getValor();
-            }
-        }
-        return saldo;
+    public double calcularSaldoTotal() throws SQLException{
+        return dao.buscarSaldo();
     }
 }
