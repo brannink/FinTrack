@@ -23,11 +23,4 @@ public class TransacaoMensal extends Transacao{
     public TransacaoMensal(int id, String descricao, double valor, String tipo, LocalDate data) throws ValorInvalidoException {
         super(id, descricao, valor, tipo, data);
     }
-    /**
-     * Responsavel por consultar a data da transação
-     * @return o dia do mês da transação mensal
-     */
-    public int getDia(){
-        return getData().getDayOfMonth();
-    }
 }

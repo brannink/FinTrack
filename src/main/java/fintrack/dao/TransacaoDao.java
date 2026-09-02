@@ -24,7 +24,9 @@ public class TransacaoDao {
         criarTabela();
     }
 
-
+    /**
+     * Responsável por criar a tabela no SQLite
+     */
     private void criarTabela() {
         Connection conexao = null;
         try {
@@ -33,7 +35,7 @@ public class TransacaoDao {
                 CREATE TABLE IF NOT EXISTS transacoes (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     descricao VARCHAR(100),
-                    valor DECIMAL(10,2),
+                    valor INTEGER,
                     tipo VARCHAR(20),
                     data DATE
                 );
@@ -64,7 +66,7 @@ public class TransacaoDao {
             PreparedStatement stmt = conexao.prepareStatement(sql);
             
             stmt.setString(1, t.getDescricao());
-            stmt.setDouble(2, t.getValor());
+            stmt.setDouble(2, t.getValor()*100);
             stmt.setString(3, t.getTipo());
             stmt.setDate(4, Date.valueOf(t.getData()));
 
@@ -104,7 +106,7 @@ public class TransacaoDao {
                     TransacaoMensal tm = new TransacaoMensal(
                         rs.getInt("id"),
                         rs.getString("descricao"),
-                        rs.getDouble("valor"),
+                        rs.getInt("valor")/100.0,
                         tipo,
                         rs.getDate("data").toLocalDate()
                     );
@@ -113,7 +115,7 @@ public class TransacaoDao {
                     Transacao t = new Transacao(
                         rs.getInt("id"),
                         rs.getString("descricao"),
-                        rs.getDouble("valor"),
+                        rs.getInt("valor")/100.0,
                         tipo,
                         rs.getDate("data").toLocalDate()
                     );
@@ -183,7 +185,7 @@ public class TransacaoDao {
             PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                saldo = rs.getDouble(1);
+                saldo = rs.getInt(1);
             } 
         } catch(SQLException e) {
             if(conexao != null) {
@@ -194,6 +196,6 @@ public class TransacaoDao {
                 conexao.close();
             }
         }
-        return saldo;
+        return saldo/100.0;
     }
 }

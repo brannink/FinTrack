@@ -40,7 +40,7 @@ public class TransacaoDaoTest {
      */
     @Test
     void testSalvar() throws SQLException, ValorInvalidoException {
-        Transacao t = new Transacao(0, "teste", 100.00, "Receita", LocalDate.now());
+        Transacao t = new Transacao(0, "teste", 100, "Receita", LocalDate.now());
         dao.salvar(t);
         List<Transacao> lista = dao.buscarTodos();
         assertTrue(lista.stream().anyMatch(tr -> tr.getDescricao().equals("teste")));
@@ -53,7 +53,7 @@ public class TransacaoDaoTest {
      */
     @Test
     void testRemover() throws SQLException, ValorInvalidoException {
-        Transacao t = new Transacao(0, "teste", 100.00, "Receita", LocalDate.now());
+        Transacao t = new Transacao(0, "teste", 100, "Receita", LocalDate.now());
         dao.salvar(t);
         List<Transacao> lista = dao.buscarTodos();
         int id = lista.stream().filter(tr -> tr.getDescricao().equals("teste")).findFirst().get().getId();
@@ -69,7 +69,7 @@ public class TransacaoDaoTest {
      */
     @Test
     void buscarSaldo() throws SQLException, ValorInvalidoException {
-        Transacao t = new Transacao(0, "teste", 100.00, "Receita", LocalDate.now());
+        Transacao t = new Transacao(0, "teste", 100, "Receita", LocalDate.now());
         dao.salvar(t);
         double saldo = dao.buscarSaldo();
         assertTrue(saldo >= 100.00);

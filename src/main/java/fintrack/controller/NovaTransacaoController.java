@@ -47,13 +47,12 @@ public class NovaTransacaoController {
     public void salvar() {
         try {
             FinTracker tracker = new FinTracker();
+
             NumberFormat nf = NumberFormat.getInstance(Locale.of("pt", "BR"));
-            
             double valor = nf.parse(campoValor.getText()).doubleValue();
             String tipo = ((RadioButton) tipoTransacao.getSelectedToggle()).getText();
 
             Transacao t;
-            
             if(tipo.equalsIgnoreCase("Receita mensal") || tipo.equalsIgnoreCase("Despesa Mensal")) {
                 t = new TransacaoMensal(0, campoDescricao.getText(), valor, tipo, campoData.getValue());
             } else {

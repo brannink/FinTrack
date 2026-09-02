@@ -22,7 +22,7 @@ public class TransacaoTest {
     @Test
     void testCriarTransacao() {
         assertDoesNotThrow(() -> {
-            Transacao t = new Transacao(1, "salario", 1000.00, "Receita", LocalDate.now());
+            Transacao t = new Transacao(1, "salario", 1000, "Receita", LocalDate.now());
             assertEquals("salario", t.getDescricao());
             assertEquals(1000.00, t.getValor());
         });
@@ -35,7 +35,7 @@ public class TransacaoTest {
     @Test
     void testValorNegativo() {
         assertThrows(ValorInvalidoException.class, () -> {
-            new Transacao(1, "teste", -100.00, "Despesa", LocalDate.now());
+            new Transacao(1, "teste", -100, "Despesa", LocalDate.now());
         });        
     }
     /**
@@ -45,7 +45,7 @@ public class TransacaoTest {
     @Test
     void testDescricaoNull() {
         assertThrows(ValorInvalidoException.class, () -> {
-            new Transacao(1, "", 100.00, "Receita", LocalDate.now());
+            new Transacao(1, "", 100, "Receita", LocalDate.now());
         });
     }
 }

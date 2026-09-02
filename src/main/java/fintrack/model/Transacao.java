@@ -1,6 +1,8 @@
 package fintrack.model;
 
 import java.time.LocalDate;
+import java.util.Locale;
+import java.text.NumberFormat;
 
 
 import fintrack.exception.ValorInvalidoException;
@@ -58,6 +60,14 @@ public class Transacao {
      */
     public double getValor(){
         return this.valor;
+    }
+    /**
+     * Retorna o valor da transação.
+     * @return o valor da transação
+     */
+    public String getValorFormatado(){
+        NumberFormat nf = NumberFormat.getInstance(Locale.of("pt", "BR"));
+        return "R$ " + nf.format(this.valor);
     }
     /**
      * Indica se a transação é uma receita ou despesa.

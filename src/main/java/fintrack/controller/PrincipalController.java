@@ -26,7 +26,7 @@ public class PrincipalController {
     @FXML private TableView<Transacao> tabelaTransacao;
     @FXML private TableColumn<Transacao, Integer> campoId; 
     @FXML private TableColumn<Transacao, String> campoDescricao;
-    @FXML private TableColumn<Transacao, Double> campoValor;
+    @FXML private TableColumn<Transacao, String> campoValor;
     @FXML private TableColumn<Transacao, String> campoTipo;
     @FXML private TableColumn<Transacao, String> campoData;
 
@@ -38,7 +38,7 @@ public class PrincipalController {
     public void initialize() {
         campoId.setCellValueFactory(new PropertyValueFactory<>("id"));
         campoDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        campoValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+        campoValor.setCellValueFactory(new PropertyValueFactory<>("valorFormatado"));
         campoTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         campoData.setCellValueFactory(new PropertyValueFactory<>("data"));
         
